@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
     console.log("Calling Claude API with ingredients:", ingredientsString);
 
     const msg = await anthropic.messages.create({
-      model: "claude-3-haiku",
+      model: "claude-3-haiku-20240307",
       max_tokens: 1024,
       system: SYSTEM_PROMPT,
       messages: [
