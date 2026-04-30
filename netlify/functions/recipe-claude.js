@@ -20,6 +20,8 @@ exports.handler = async (event, context) => {
     const { ingredients } = JSON.parse(event.body);
     const ingredientsString = ingredients.join(", ");
 
+    console.log("Calling Claude API with ingredients:", ingredientsString);
+
     const msg = await anthropic.messages.create({
       model: "claude-3-haiku-20240307",
       max_tokens: 1024,
@@ -32,15 +34,17 @@ exports.handler = async (event, context) => {
       ],
     });
 
+    console.log("Claude API response:", msg);
+
     return {
       statusCode: 200,
       body: JSON.stringify({ recipe: msg.content[0].text }),
     };
   } catch (error) {
-    console.error(error);
+    console.error("Error in recipe-claude function:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Internal server error" }),
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };

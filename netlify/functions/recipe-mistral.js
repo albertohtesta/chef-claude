@@ -18,6 +18,8 @@ exports.handler = async (event, context) => {
     const { ingredients } = JSON.parse(event.body);
     const ingredientsString = ingredients.join(", ");
 
+    console.log("Calling Mistral API with ingredients:", ingredientsString);
+
     const response = await hf.chatCompletion({
       model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
       messages: [
@@ -30,15 +32,17 @@ exports.handler = async (event, context) => {
       max_tokens: 1024,
     });
 
+    console.log("Mistral API response:", response);
+
     return {
       statusCode: 200,
       body: JSON.stringify({ recipe: response.choices[0].message.content }),
     };
   } catch (error) {
-    console.error(error);
+    console.error("Error in recipe-mistral function:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Internal server error" }),
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };
