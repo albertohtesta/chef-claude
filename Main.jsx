@@ -16,7 +16,10 @@ export default function Main() {
 
   React.useEffect(() => {
     if (recipe && recipeSection.current) {
-      recipeSection.current.scrollIntoView({ behavior: "smooth" });
+      // Pequeño delay para asegurar que el DOM se haya renderizado
+      setTimeout(() => {
+        recipeSection.current.scrollIntoView({ behavior: "smooth" });
+      }, 0);
     }
   }, [recipe]);
   //
@@ -46,14 +49,10 @@ export default function Main() {
       </form>
 
       {ingredients.length > 0 && (
-        <IngredientsList
-          ingredients={ingredients}
-          getRecipe={getRecipe}
-          ref={recipeSection}
-        />
+        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
       )}
 
-      {recipe && <ClaudeRecipe recipe={recipe} />}
+      {recipe && <ClaudeRecipe recipe={recipe} ref={recipeSection} />}
     </main>
   );
 }
