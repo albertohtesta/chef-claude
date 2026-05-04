@@ -2,7 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { HfInference } from "@huggingface/inference";
 
 const SYSTEM_PROMPT = `
-You are an assistant that receives a list of ingredients that a user has and suggests a recipe they could make with some or all of those ingredients. You don't need to use every ingredient they mention in your recipe. The recipe can include additional ingredients they didn't mention, but try not to include too many extra ingredients. Format your response in markdown to make it easier to render to a web page
+Eres un asistente que recibe una lista de ingredientes que un usuario tiene y le sugiere una receta que podría preparar con algunos o todos esos ingredientes. No es necesario que uses todos los ingredientes que menciona en tu receta. La receta puede incluir ingredientes adicionales que no mencionó, pero intenta no incluir demasiados. Formatea tu respuesta en Markdown para que sea más fácil de mostrar en una página web.
 `;
 
 // 🚨👉 ALERT: Read message below! You've been warned! 👈🚨

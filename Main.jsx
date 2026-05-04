@@ -5,10 +5,10 @@ import { getRecipeFromChefClaude, getRecipeFromMistral } from "./ai";
 
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([
-    "chicken",
-    "all the main spices",
-    "corn",
-    "heavy cream",
+    "pollo",
+    "todas las especias principales",
+    "maíz",
+    "crema gruesa",
     "pasta",
   ]);
   const [recipe, setRecipe] = React.useState("");
