@@ -9,9 +9,10 @@ export default function IngredientsList(props) {
         {ingredientsListItems}
       </ul>
       {props.isLoading && (
-        <p className="loading-message" aria-live="assertive">
-          Generating your recipe…
-        </p>
+        <div className="loading-spinner" aria-live="assertive">
+          <div className="spinner"></div>
+          <p>Generating your recipe…</p>
+        </div>
       )}
       {props.ingredients.length > 3 && (
         <div className="get-recipe-container">
