@@ -12,6 +12,7 @@ export default function Main() {
     "pasta",
   ]);
   const [recipe, setRecipe] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
   const recipeSection = React.useRef(null);
 
   React.useEffect(() => {
@@ -24,8 +25,13 @@ export default function Main() {
   }, [recipe]);
   //
   async function getRecipe() {
-    const recipeMarkdown = await getRecipeFromChefClaude(ingredients);
-    setRecipe(recipeMarkdown);
+    setIsLoading(true);
+    try {
+      const recipeMarkdown = await getRecipeFromChefClaude(ingredients);
+      setRecipe(recipeMarkdown);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function addIngredient(e) {
@@ -49,7 +55,11 @@ export default function Main() {
       </form>
 
       {ingredients.length > 0 && (
-        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
+        <IngredientsList
+          ingredients={ingredients}
+          getRecipe={getRecipe}
+          isLoading={isLoading}
+        />
       )}
 
       {recipe && <ClaudeRecipe recipe={recipe} ref={recipeSection} />}

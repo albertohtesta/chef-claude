@@ -3,18 +3,25 @@ export default function IngredientsList(props) {
     <li key={ingredient}>{ingredient}</li>
   ));
   return (
-    <section>
+    <section aria-busy={props.isLoading ? "true" : "false"}>
       <h2>Ingredients on hand:</h2>
       <ul className="ingredients-list" aria-live="polite">
         {ingredientsListItems}
       </ul>
+      {props.isLoading && (
+        <p className="loading-message" aria-live="assertive">
+          Generating your recipe…
+        </p>
+      )}
       {props.ingredients.length > 3 && (
         <div className="get-recipe-container">
-          <div ref={props.ref}>
+          <div>
             <h3>Ready for a recipe?</h3>
             <p>Generate a recipe from your list of ingredients.</p>
           </div>
-          <button onClick={props.getRecipe}>Get a recipe</button>
+          <button onClick={props.getRecipe} disabled={props.isLoading}>
+            {props.isLoading ? "Loading..." : "Get a recipe"}
+          </button>
         </div>
       )}
     </section>
